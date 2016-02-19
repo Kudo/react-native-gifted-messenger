@@ -423,18 +423,17 @@ var GiftedMessenger = React.createClass({
           onLayout={(event) => {
             var layout = event.nativeEvent.layout;
             this.listHeight = layout.height;
-            if (this.firstDisplay === true) {
-              requestAnimationFrame(() => {
-                this.firstDisplay = false;
-                this.scrollWithoutAnimationToBottom();
-              });
-            }
-
           }}
           renderFooter={() => {
             return <View onLayout={(event)=>{
               var layout = event.nativeEvent.layout;
               this.footerY = layout.y;
+              if (this.footerY !== 0 && this.firstDisplay === true) {
+                requestAnimationFrame(() => {
+                  this.firstDisplay = false;
+                  this.scrollWithoutAnimationToBottom();
+                });
+              }
             }}></View>
           }}
 
